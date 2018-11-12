@@ -1,0 +1,7 @@
+What do the machine learning algorithms expect as input?
+How do we want to format data?
+
+How do these machine learning algorithms work?
+Naive Bayes
+Support Vector Machines 
+Decision Trees
