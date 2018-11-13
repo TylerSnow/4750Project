@@ -12,7 +12,7 @@ def naiveBayes(TrainingFiles): #TrainingFiles is a list of tuples (filename, pos
 			for word in line:
 				trainModel(word,TrainingFiles[fileNum][1])
 	tModel=generateTrainedModel()
-	naiveBayesFile=open("naiveBayesTrainedModel.bin",'w')
+	naiveBayesFile=open("../bin/naiveBayesTrainedModel.bin",'w')
 	pickle.dump(tModel,naiveBayesFile)
 	naiveBayesFile.close()
 
@@ -43,5 +43,3 @@ def GenerateTrainedModel():
 		trainedModel[word]=(probOfWord,probNegative,probPositive)
 	return trainedModel
 
-def SerializeModel():
-	
