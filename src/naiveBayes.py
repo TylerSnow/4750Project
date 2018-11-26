@@ -4,7 +4,6 @@ posCounter = 0
 negCounter = 0
 model = {}
 
-
 # Args:
 # TrainingFiles: This list of marked and tokenized training files
 #                   [tokenized_revies, sentiment]
