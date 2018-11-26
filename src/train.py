@@ -1,7 +1,6 @@
-import tokenize
+import ourTokenizer
 import os
 import sys
-import naiveBayes
 
 
 """
@@ -61,17 +60,21 @@ def process_files(neg_fnames, pos_fnames):
     return neg_reviews, pos_reviews
 
 
-def main():
+#def main():
+#    root = Tk()
+#    gui = sentimentAnalysisGUI(root)
+#    root.mainloop()
+
     #Retrieving and processing the training data
-    neg_fnames, pos_fnames = get_training_filepaths()
-    neg_reviews, pos_reviews = process_files(neg_fnames, pos_fnames)
-    print("done processing files")
+#    neg_fnames, pos_fnames = get_training_filepaths()
+#    neg_reviews, pos_reviews = process_files(neg_fnames, pos_fnames)
+#    print("done processing files")
 
-    reviews = [neg_reviews, pos_reviews]
+#    reviews = [neg_reviews, pos_reviews]
 
-    naiveBayes.naiveBayes(reviews)
+#    naiveBayes.naiveBayes(reviews)
 
 
 
-if __name__ == '__main__':
-    main()
+#if __name__ == '__main__':
+#    main()

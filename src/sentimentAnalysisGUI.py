@@ -1,5 +1,10 @@
-#from Tkinter import Tk, Label, Button, Listbox
 from Tkinter import *
+import naiveBayes
+import SVM
+import train
+import os
+import sys
+
 class sentimentAnalysisGUI:
     
     def callSelectionMethods(self):
@@ -57,11 +62,21 @@ class sentimentAnalysisGUI:
         self.close_button = Button(master, text="Close", command=master.quit)
         self.close_button.pack()
 
+def main():
+    root = Tk()
+    gui = sentimentAnalysisGUI(root)
+    root.mainloop()
+
+    #Retrieving and processing the training data
+    neg_fnames, pos_fnames = get_training_filepaths()
+    neg_reviews, pos_reviews = process_files(neg_fnames, pos_fnames)
+    print("done processing files")
+
+    reviews = [neg_reviews, pos_reviews]
+
+    naiveBayes.naiveBayes(reviews)
 
 
-root = Tk()
-gui = sentimentAnalysisGUI(root)
-root.mainloop()
 
-#win=Tkinter.Tk()
-#win.mainloop()
+if __name__ == '__main__':
+    main()
