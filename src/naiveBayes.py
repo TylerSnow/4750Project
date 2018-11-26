@@ -1,6 +1,5 @@
 # import pickle
 
-
 # Args:
 # TrainingFiles: This list of marked and tokenized training files
 #                   [tokenized_revies, sentiment]

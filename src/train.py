@@ -1,4 +1,4 @@
-import tokenize
+import ourTokenizer
 import os
 import naiveBayes
 
@@ -62,10 +62,10 @@ def main():
     neg_reviews, pos_reviews = process_files(neg_fnames, pos_fnames)
     print("done processing files")
 
-    reviews = [neg_reviews, pos_reviews]
 
-    naiveBayes.naiveBayes(reviews)
+#    reviews = [neg_reviews, pos_reviews]
 
+#    naiveBayes.naiveBayes(reviews)
 
-if __name__ == '__main__':
-    main()
+#if __name__ == '__main__':
+#    main()

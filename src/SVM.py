@@ -17,7 +17,6 @@ def trainSVM(path):
     files=sklearn.datasets.load_files(path, shuffle=True)
     #print(files)
     model=CountVectorizer(analyzer='word',stop_words=["the","is","an","and"])
-    print(model)
     X_train=model.fit_transform(files.data)
     #print(X_train.toarray())
     tf_transformer = TfidfTransformer()
