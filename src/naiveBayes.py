@@ -1,14 +1,13 @@
-import pickle
-
-posCounter = 0
-negCounter = 0
-model = {}
-
+# import pickle
 
 # Args:
 # TrainingFiles: This list of marked and tokenized training files
 #                   [tokenized_revies, sentiment]
 def naiveBayes(TrainingFiles):
+    model = {}
+    model["posCounter"] = 0
+    model["negCounter"] = 0
+    model["words"] = {}
     # Reads in unique words and updates their positive/negative counters
     for trainingSet in TrainingFiles:
         for review in trainingSet:
@@ -26,23 +25,20 @@ def naiveBayes(TrainingFiles):
     # prob_neg_the = (prob_the_neg * prob_neg) / prob_the
     # print("P(pos|the) = {}".format(prob_pos_the))
     # print("P(neg|the) = {}".format(prob_neg_the))
-
     # model['the'][1]/model['the'][0]+model['the'][1]
 
 
 # Method to update the model for each word
-def trainModel(word, sentiment):
-    global posCounter
-    global negCounter
+def trainModel(wordDict, word, sentiment):
     # try:
-    if(word not in model):
-        model[word] = [0, 0]
+    if(word not in wordDict):
+        wordDict[word] = [0, 0]
     if(sentiment == "neg"):
-        model[word][0] += 1
-        negCounter += 1
+        wordDict[word][0] += 1
+        wordDict["negCounter"] += 1
     elif(sentiment == "pos"):
-        model[word][1] += 1
-        posCounter += 1
+        wordDict[word][1] += 1
+        wordDict["posCounter"] += 1
     # print word, model[word]
     # except KeyError as e:
     #   if(posOrNeg==("pos")):
@@ -54,15 +50,21 @@ def trainModel(word, sentiment):
 
 
 # Method to generate trained model
-def generateTrainedModel():
+def generateTrainedModel(model):
     trainedModel = {}
     trainedModel["words"] = {}
-    totalCounter = float(posCounter + negCounter)
-    for word in model:
-        probOfWord = sum(model[word]) / totalCounter
-        probOfWordNeg = model[word][0] / totalCounter
-        probOfWordPos = model[word][1] / totalCounter
-        trainedModel["words"][word] = (probOfWord, probOfWordNeg, probOfWordPos)
+
+    words = model["words"]
+    totalCounter = float(model["posCounter"] + model["negCounter"])
+    for word in words:
+        # The probability of the word occuring
+        probOfWord = sum(words[word]) / totalCounter
+        # The probability of the word occuring given a negative sentiment
+        probOfWordNeg = model[word][0] / model["negCounter"]
+        # The probability of the word occuring given a positive sentiment
+        probOfWordPos = model[word][1] / model["posCounter"]
+
+        trainedModel[words][word] = (probOfWord, probOfWordNeg, probOfWordPos)
 
     return trainedModel
 
