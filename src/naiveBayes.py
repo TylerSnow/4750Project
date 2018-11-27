@@ -14,18 +14,18 @@ def naiveBayes(TrainingFiles):
         for review in trainingSet:
             for word in review[0]:
                 trainModel(word, review[1])
-    total = sum(model['the'])
-    totalCounter = negCounter + posCounter
-    prob_the_neg = model['the'][0] / float(negCounter)
-    prob_the_pos = model['the'][1] / float(posCounter)
-    prob_the = total / float(totalCounter)
-    prob_pos = posCounter / float(totalCounter)
-    prob_neg = negCounter / float(totalCounter)
+    # total = sum(model['the'])
+    # totalCounter = negCounter + posCounter
+    # prob_the_neg = model['the'][0] / float(negCounter)
+    # prob_the_pos = model['the'][1] / float(posCounter)
+    # prob_the = total / float(totalCounter)
+    # prob_pos = posCounter / float(totalCounter)
+    # prob_neg = negCounter / float(totalCounter)
 
-    prob_pos_the = (prob_the_pos * prob_pos) / prob_the
-    prob_neg_the = (prob_the_neg * prob_neg) / prob_the
-    print("P(pos|the) = {}".format(prob_pos_the))
-    print("P(neg|the) = {}".format(prob_neg_the))
+    # prob_pos_the = (prob_the_pos * prob_pos) / prob_the
+    # prob_neg_the = (prob_the_neg * prob_neg) / prob_the
+    # print("P(pos|the) = {}".format(prob_pos_the))
+    # print("P(neg|the) = {}".format(prob_neg_the))
 
     # model['the'][1]/model['the'][0]+model['the'][1]
 
@@ -56,16 +56,14 @@ def trainModel(word, sentiment):
 # Method to generate trained model
 def generateTrainedModel():
     trainedModel = {}
-    trainedModel[words] = {}
+    trainedModel["words"] = {}
     totalCounter = float(posCounter + negCounter)
     for word in model:
         probOfWord = sum(model[word]) / totalCounter
         probOfWordNeg = model[word][0] / totalCounter
         probOfWordPos = model[word][1] / totalCounter
-        # probNegative = model[word][0] / (model[word][0] + model[word][1])
-        # probPositive = model[word][1] / (model[word][0] + model[word][1])
-        # probOfWord = (model[word][0] + model[word][1]) / (posCounter + negCounter)
-        trainedModel[words][word] = (probOfWord, probWordNegative, probWordPositive)
+        trainedModel["words"][word] = (probOfWord, probOfWordNeg, probOfWordPos)
+
     return trainedModel
 
 
