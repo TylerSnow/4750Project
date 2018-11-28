@@ -8,21 +8,57 @@ import os
 import sys
 
 class UI:
-    def callSelectionMethods(self):
-        if(len(self.algorithms.curselection())!=0 and len(self.trainSet.curselection())!=0):
-            self.selectAlg()
-            self.selectTrainer()
+    def callTrainSelectionMethods(self):
+        if(len(self.train_Algorithms.curselection())!=0 and len(self.trainSet.curselection())!=0):
+            alg=self.selectTrainAlg()
+            trainSet=self.selectTrainer()
+            trainPath=""
+            if(trainSet=="IMDB Movie set"):
+                trainPath="Datasets/aclImdb/train"
+            elif(trainSet=="IMDB Movie subset"):
+                trainPath="Datasets/debugSets/train"
+                
+            if(alg=="Naive Bayes"):
+                print("NaiveBayes")
+            elif(alg=="Support Vector Machine"):
+                svm=SVM.SVM()
+                svm.trainSVM(trainPath)
+        else:
+            print("Please select an algorithm and a test set.")
+
+    def callTestSelectionMethods(self):
+        if(len(self.test_Algorithms.curselection())!=0 and len(self.testSet.curselection())!=0):
+            alg=self.selectTestAlg()
+            testSet=self.selectTest()
+            testPath=""
+            if(testSet=="IMDB Movie set"):
+                testPath="Datasets/aclImdb/test"
+            elif(testSet=="IMDB Movie subset"):
+                testPath="Datasets/debugSets/test"
+                
+            if(alg=="Naive Bayes"):
+                print("NaiveBayes")
+            elif(alg=="Support Vector Machine"):
+                svm=SVM.SVM()
+                svm.testSVM(testPath)
         else:
             print("Please select an algorithm and a test set.")
             
-    def selectAlg(self):
+    def selectTrainAlg(self):
         clist = list()
-        selection = self.algorithms.curselection()
+        selection = self.train_Algorithms.curselection()
         for i in selection:
-            choice= self.algorithms.get(i)
+            choice= self.train_Algorithms.get(i)
             clist.append(choice)
-        for val in clist:
-            print(val)
+        return clist[0]
+    
+    def selectTestAlg(self):
+        clist = list()
+        selection = self.test_Algorithms.curselection()
+        for i in selection:
+            choice= self.test_Algorithms.get(i)
+            clist.append(choice)
+        return clist[0]
 
     def selectTest(self):
         tlist = list()
@@ -30,8 +66,7 @@ class UI:
         for i in selection:
             choice= self.testSet.get(i)
             tlist.append(choice)
-        for val in tlist:
-            print(val)
+        return tlist[0]
 
     def selectTrainer(self):
         tlist = list()
@@ -39,8 +74,7 @@ class UI:
         for i in selection:
             choice= self.trainSet.get(i)
             tlist.append(choice)
-        for val in tlist:
-            print(val)
+        return tlist[0]
 
     def __init__(self, master):
         self.master = master
@@ -62,6 +96,25 @@ class UI:
         # Creating the test page
         self.f_Test = tk.Frame(self.notebook)
         self.f_Test.configure(background='white')
+        self.test_algLabel = tk.Label(self.f_Test, text="Testing Algorithm")
+        self.test_algLabel.pack()
+        self.test_Algorithms = tk.Listbox(self.f_Test, selectmode=tk.SINGLE, height=2, exportselection=0)
+        self.test_Algorithms.insert(1, "Naive Bayes")
+        self.test_Algorithms.insert(2, "Support Vector Machine")
+        self.test_Algorithms.pack()
+
+        self.test_data = tk.Label(self.f_Test, text = "Testing Dataset")
+        self.test_data.pack()
+        self.testSet = tk.Listbox(self.f_Test, selectmode=tk.SINGLE, height=2, exportselection=0)
+        self.testSet.insert(1, "IMDB Movie set")
+        self.testSet.insert(2, "IMDB Movie subset")
+        self.testSet.pack()
+        #Test page buttons
+        self.test_button = tk.Button(self.f_Test, text="Test", command=self.callTestSelectionMethods)
+        self.test_button.pack()
+
+        self.test_close_button = tk.Button(self.f_Test, text="Close", command=master.quit)
+        self.test_close_button.pack()
 
         # Creating the train page
         self.f_Train = tk.Frame(self.notebook)
@@ -75,11 +128,12 @@ class UI:
 
         self.train_data = tk.Label(self.f_Train, text = "Training Dataset")
         self.train_data.pack()
-        self.trainSet = tk.Listbox(self.f_Train, selectmode=tk.SINGLE, height=1, exportselection=0)
-        self.trainSet.insert(1, "IMDB Movie test set")
+        self.trainSet = tk.Listbox(self.f_Train, selectmode=tk.SINGLE, height=2, exportselection=0)
+        self.trainSet.insert(1, "IMDB Movie set")
+        self.trainSet.insert(2, "IMDB Movie subset")
         self.trainSet.pack()
         #Train page buttons
-        self.train_button = tk.Button(self.f_Train, text="Train", command=self.callSelectionMethods)
+        self.train_button = tk.Button(self.f_Train, text="Train", command=self.callTrainSelectionMethods)
         self.train_button.pack()
 
         self.close_button = tk.Button(self.f_Train, text="Close", command=master.quit)
