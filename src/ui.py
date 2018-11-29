@@ -27,20 +27,21 @@ class UI:
             print("Please select an algorithm and a test set.")
 
     def callTestSelectionMethods(self):
-        if(len(self.test_Algorithms.curselection())!=0 and len(self.testSet.curselection())!=0):
-            alg=self.selectTestAlg()
+        if(len(self.testSet.curselection())!=0):
+            
             testSet=self.selectTest()
             testPath=""
+            #get selected test sets
             if(testSet=="IMDB Movie set"):
                 testPath="Datasets/aclImdb/test"
             elif(testSet=="IMDB Movie subset"):
                 testPath="Datasets/debugSets/test"
-                
-            if(alg=="Naive Bayes"):
-                print("NaiveBayes")
-            elif(alg=="Support Vector Machine"):
-                svm=SVM.SVM()
-                svm.testSVM(testPath)
+            elif(testSet=="Stanford Movie Set"):
+                testPath="Datasets/stanfordMR/test"
+
+            #Calculate accuracy of testVars of Naive bayes and SVM
+            svm=SVM.SVM()
+            svm.testSVM(testPath)
         else:
             print("Please select an algorithm and a test set.")
             
@@ -58,7 +59,7 @@ class UI:
         for i in selection:
             choice= self.test_Algorithms.get(i)
             clist.append(choice)
-        return clist[0]
+        return clist
 
     def selectTest(self):
         tlist = list()
@@ -98,16 +99,24 @@ class UI:
         self.f_Test.configure(background='white')
         self.test_algLabel = tk.Label(self.f_Test, text="Testing Algorithm")
         self.test_algLabel.pack()
+        
         self.test_Algorithms = tk.Listbox(self.f_Test, selectmode=tk.SINGLE, height=2, exportselection=0)
         self.test_Algorithms.insert(1, "Naive Bayes")
         self.test_Algorithms.insert(2, "Support Vector Machine")
         self.test_Algorithms.pack()
-
         self.test_data = tk.Label(self.f_Test, text = "Testing Dataset")
         self.test_data.pack()
-        self.testSet = tk.Listbox(self.f_Test, selectmode=tk.SINGLE, height=2, exportselection=0)
+        #Test data listbox with scrollview
+        self.testDataFrame=tk.Frame(self.f_Test)
+        self.testDataFrame.pack(fill=tk.Y)
+        self.test_scrollbar=tk.Scrollbar(self.testDataFrame)
+        self.test_scrollbar.pack(side=tk.RIGHT,fill=tk.Y)
+        self.testSet = tk.Listbox(self.testDataFrame, selectmode=tk.MULTIPLE, height=10, exportselection=0)
+        self.testSet.config(yscrollcommand=self.test_scrollbar.set)
+        self.test_scrollbar.config(command=self.testSet.yview)
         self.testSet.insert(1, "IMDB Movie set")
         self.testSet.insert(2, "IMDB Movie subset")
+        self.testSet.insert(3, "Stanford Movie Set")
         self.testSet.pack()
         #Test page buttons
         self.test_button = tk.Button(self.f_Test, text="Test", command=self.callTestSelectionMethods)
