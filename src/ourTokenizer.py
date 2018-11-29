@@ -27,9 +27,9 @@ def tokenize_file(lines):
     stripped_words = []
     filtered_words = []
 
-    word_filter = ["br"]  # br is a string left over from break tags in our data
+    word_filter = ["br", "s", "t", "the", "it", "a", "of", "to", "is", "i", "in", "this", "that", "this", "that", "was", "and", "for", "on", "you", "he", "she", "are", "have", "be", "one", "at"]
     # re_words = "(?=\S*[\'-])([A-Za-z'-]+)|[A-Za-z]+|!|\?)" # Regex to match words, !, or ?
-    re_words = re.compile(r'(?=\S*[\'-])[A-Za-z\'-]+|[A-Za-z]+|!|\?')
+    re_words = re.compile(r'(?=\S*[\-])[A-Za-z\-]+[A-Za-z]+|!|\?')
     for line in lines:
         stripped_words += re.findall(re_words, line)
     filtered_words = [word for word in stripped_words if word not in word_filter]
