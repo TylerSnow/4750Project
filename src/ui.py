@@ -19,7 +19,8 @@ class UI:
                 trainPath="Datasets/debugSets/train"
                 
             if(alg=="Naive Bayes"):
-                print("NaiveBayes")
+                nb=naiveBayes.NaiveBayes()
+                nb.train(trainPath)
             elif(alg=="Support Vector Machine"):
                 svm=SVM.SVM()
                 svm.trainSVM(trainPath)
@@ -32,16 +33,18 @@ class UI:
             testSet=self.selectTest()
             testPath=""
             #get selected test sets
-            if(testSet=="IMDB Movie set"):
+            if(testSet=="IMDB Movie set(25000)"):
                 testPath="Datasets/aclImdb/test"
-            elif(testSet=="IMDB Movie subset"):
+            if(testSet=="IMDB Movie subset"):
                 testPath="Datasets/debugSets/test"
-            elif(testSet=="Stanford Movie Set"):
+            if(testSet=="Stanford Movie Set(2000)"):
                 testPath="Datasets/stanfordMR/test"
 
             #Calculate accuracy of testVars of Naive bayes and SVM
             svm=SVM.SVM()
             svm.testSVM(testPath)
+            nb=naiveBayes.NaiveBayes()
+            nb.validate(testPath)
         else:
             print("Please select an algorithm and a test set.")
             
@@ -114,9 +117,9 @@ class UI:
         self.testSet = tk.Listbox(self.testDataFrame, selectmode=tk.MULTIPLE, height=10, exportselection=0)
         self.testSet.config(yscrollcommand=self.test_scrollbar.set)
         self.test_scrollbar.config(command=self.testSet.yview)
-        self.testSet.insert(1, "IMDB Movie set")
+        self.testSet.insert(1, "IMDB Movie set(25000)")
         self.testSet.insert(2, "IMDB Movie subset")
-        self.testSet.insert(3, "Stanford Movie Set")
+        self.testSet.insert(3, "Stanford Movie Set(2000)")
         self.testSet.pack()
         #Test page buttons
         self.test_button = tk.Button(self.f_Test, text="Test", command=self.callTestSelectionMethods)
