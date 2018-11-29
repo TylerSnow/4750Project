@@ -121,6 +121,7 @@ class NaiveBayes:
 
         accuracy = correctCount / float(fileCount)
         print "Naive Bayes accuracy: {}".format(accuracy)
+        return accuracy
 
     def test(self, filename):
         name = ""
