@@ -1,7 +1,9 @@
 import sklearn
 import pickle
 import os
-import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('TkAgg')
+from matplotlib import pyplot as plt
 import numpy as np
 import scipy as sp
 from sklearn.feature_extraction.text import CountVectorizer
@@ -30,6 +32,7 @@ class SVM:
         predicted= pipeline.predict(testFiles)
         score=pipeline.score(testFiles.data,testFiles.target)
         print "SVM accuracy: {}".format(score)
+        return score
 
     def pkl_model(self,pipeline):
         with open(self.pipeline_filename,'wb') as file:
