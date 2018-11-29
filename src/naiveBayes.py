@@ -18,8 +18,11 @@ class NaiveBayes:
         self.wordCounts["posCounter"] = 0
         self.wordCounts["negCounter"] = 0
         self.wordCounts["words"] = {}
+        self.root_path=os.path.dirname(os.path.abspath(__file__))
+        self.parent_path=os.path.dirname(os.path.abspath(self.root_path))
 
     def train(self, TrainingPath):
+        TrainingPath=os.path.join(self.parent_path,TrainingPath)
         if(os.path.isdir(TrainingPath) and os.path.exists(TrainingPath)):
             for root, dirs, files in os.walk(TrainingPath):
                 for dir in dirs:
@@ -101,12 +104,13 @@ class NaiveBayes:
     #                one for the negative data named neg
     #                one for the positive data named pos
     def validate(self, validatePath):
+        validatePath=os.path.join(self.parent_path,validatePath)
         self.trainedModel = self.pkl_to_model()
         fileCount = 0
         correctCount = 0
         for root, dirs, files in os.walk(validatePath):
             for dire in dirs:
-                print dire
+                #print dire
                 for root1, dirs1, files1 in os.walk(os.path.join(root, dire)):
                     for file in files1:
                         fileCount += 1
@@ -116,7 +120,7 @@ class NaiveBayes:
                             correctCount += 1
 
         accuracy = correctCount / float(fileCount)
-        print "accuracy: {}".format(accuracy)
+        print "Naive Bayes accuracy: {}".format(accuracy)
 
     def test(self, filename):
         name = ""
@@ -155,10 +159,10 @@ class NaiveBayes:
         else:
             sentiment = "neg"
 
-        print "{}".format(filename)
-        print "sentiment: {}".format(sentiment)
-        print "positive: {}".format(prob_pos)
-        print "negative: {}".format(prob_neg)
+        #print "{}".format(filename)
+        #print "sentiment: {}".format(sentiment)
+        #print "positive: {}".format(prob_pos)
+        #print "negative: {}".format(prob_neg)
 
         return sentiment
 

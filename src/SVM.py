@@ -1,17 +1,11 @@
 import sklearn
 import pickle
 import os
-from sklearn.linear_model import LogisticRegression
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.feature_extraction.text import TfidfTransformer
-from sklearn import datasets
-from sklearn import cross_validation
-from sklearn.model_selection import cross_val_score;
-import pprint as pp
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy as sp
-from sklearn.decomposition import PCA
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn import datasets
 from sklearn.pipeline import Pipeline
 
 class SVM:
@@ -35,7 +29,7 @@ class SVM:
         testFiles=sklearn.datasets.load_files(testPath, shuffle=True)
         predicted= pipeline.predict(testFiles)
         score=pipeline.score(testFiles.data,testFiles.target)
-        print(score)
+        print "SVM accuracy: {}".format(score)
 
     def pkl_model(self,pipeline):
         with open(self.pipeline_filename,'wb') as file:
