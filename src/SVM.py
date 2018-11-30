@@ -9,6 +9,7 @@ import scipy as sp
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn import datasets
 from sklearn.pipeline import Pipeline
+from sklearn.svm import LinearSVC
 
 class SVM:
     def __init__(self):

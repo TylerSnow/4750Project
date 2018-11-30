@@ -13,9 +13,9 @@ class UI:
             alg=self.selectTrainAlg()
             trainSet=self.selectTrainer()
             trainPath=""
-            if(trainSet=="IMDB Movie set"):
+            if(trainSet=="IMDB Movie set(25000)"):
                 trainPath="Datasets/aclImdb/train"
-            elif(trainSet=="IMDB Movie subset"):
+            elif(trainSet=="IMDB Movie subset(750)"):
                 trainPath="Datasets/debugSets/train"
             elif(trainSet=="Custom Set 1"):
                 trainPath="Datasets/custom1/train"
@@ -46,7 +46,7 @@ class UI:
             #get selected test sets
                 if(curSet=="IMDB Movie set(25000)"):
                     testPath="Datasets/aclImdb/test"
-                if(curSet=="IMDB Movie subset"):
+                if(curSet=="IMDB Movie subset(650)"):
                     testPath="Datasets/debugSets/test"
                 if(curSet=="Stanford Movie Set(2000)"):
                     testPath="Datasets/stanfordMR/test"
@@ -173,7 +173,7 @@ class UI:
         self.train_data = tk.Label(self.f_Train, text = "Training Dataset")
         self.train_data.pack()
         self.trainSet = tk.Listbox(self.f_Train, selectmode=tk.SINGLE, height=5, exportselection=0)
-        self.trainSet.insert(1, "IMDB Movie set(50000)")
+        self.trainSet.insert(1, "IMDB Movie set(25000)")
         self.trainSet.insert(2, "IMDB Movie subset(750)")
         self.trainSet.insert(3, "Custom Set 1")
         self.trainSet.insert(4, "Custom Set 2")
