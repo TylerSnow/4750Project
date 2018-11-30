@@ -27,7 +27,7 @@ def tokenize_file(lines):
     stripped_words = []
     filtered_words = []
 
-    word_filter = ["br", "s", "t", "the", "it", "a", "of", "to", "is", "i", "in", "this", "that", "this", "that", "was", "and", "for", "on", "you", "he", "she", "are", "have", "be", "one", "at"]
+    word_filter = ["br", "s", "t", "the", "it", "a", "of", "to", "is", "i", "in", "this", "that", "this", "that", "was", "and", "for", "on", "you", "he", "she", "are", "have", "be", "one", "movie", "film", "all", "at", "by", "who", "they", "from", "so", "there", "what","our", "your", "its"]
     # re_words = "(?=\S*[\'-])([A-Za-z'-]+)|[A-Za-z]+|!|\?)" # Regex to match words, !, or ?
     re_words = re.compile(r'(?=\S*[\-])[A-Za-z\-]+[A-Za-z]+|!|\?')
     for line in lines:
