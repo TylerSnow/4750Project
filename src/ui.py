@@ -23,14 +23,15 @@ class UI:
                 trainPath="Datasets/custom2/train"
             elif(trainSet=="Custom Set 3"):
                 trainPath="Datasets/custom3/train"
-                
-                
+
             if(alg=="Naive Bayes"):
                 nb=naiveBayes.NaiveBayes()
                 nb.train(trainPath)
+                print("done training naive bayes")
             elif(alg=="Support Vector Machine"):
                 svm=SVM.SVM()
                 svm.trainSVM(trainPath)
+                print("done training support vector machine")
         else:
             print("Please select an algorithm and a test set.")
 
