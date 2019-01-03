@@ -1,7 +1,7 @@
 Run Program:<br>
 >>-Program requires [scikit-learn](https://scikit-learn.org)<br>
 >>-to run application user must direct themselves into the src folder using the terminal.<br>
->>-Then the user must run the command "python ui.py" which will prompt the application.<br><br>
+>>-Then the user must run ui.py file inside the src folder which will prompt the application.<br><br>
 
 Training:<br>
 >>-to train models select the train tab at the top of the application.<br>
