@@ -1,6 +1,6 @@
 Run Program:<br>
 >>-Program requires [scikit-learn](https://scikit-learn.org), [matplotlib](https://matplotlib.org/), [numpy](http://www.numpy.org/) and [scipy](https://www.scipy.org/).<br>
->>-to run application user must direct themselves into the src folder using the terminal.<br>
+>>-to run application user must direct themselves into the src folder inside of the Project folder.<br>
 >>-Then the user must run ui.py file inside the src folder which will prompt the application.<br><br>
 
 Training:<br>
